@@ -4,7 +4,9 @@ import { Dialog, Stack, TextField } from '@fluentui/react'
 import { CopyRegular } from '@fluentui/react-icons'
 
 import { CosmosDBStatus } from '../../api'
-import Contoso from '../../assets/Contoso.svg'
+// import Contoso from '../../assets/Contoso.svg'
+import Contoso from '../../assets/saif_face.jpg'
+import SaifText from '../../assets/saif_text.svg'
 import { HistoryButton, ShareButton } from '../../components/common/Button'
 import { AppStateContext } from '../../state/AppProvider'
 
@@ -18,6 +20,7 @@ const Layout = () => {
   const [hideHistoryLabel, setHideHistoryLabel] = useState<string>('Hide chat history')
   const [showHistoryLabel, setShowHistoryLabel] = useState<string>('Show chat history')
   const [logo, setLogo] = useState('')
+  const [headerLogo, setHeaderLogo] = useState('')
   const appStateContext = useContext(AppStateContext)
   const ui = appStateContext?.state.frontendSettings?.ui
 
@@ -42,9 +45,16 @@ const Layout = () => {
 
   useEffect(() => {
     if (!appStateContext?.state.isLoading) {
-      setLogo(ui?.logo || Contoso)
+      setLogo(Contoso)
     }
   }, [appStateContext?.state.isLoading])
+
+  useEffect(() => {
+    if (!appStateContext?.state.isLoading) {
+      setHeaderLogo(SaifText)
+    }
+  }, [appStateContext?.state.isLoading])
+
 
   useEffect(() => {
     if (copyClicked) {
@@ -78,10 +88,13 @@ const Layout = () => {
       <header className={styles.header} role={'banner'}>
         <Stack horizontal verticalAlign="center" horizontalAlign="space-between">
           <Stack horizontal verticalAlign="center">
-            <img src={logo} className={styles.headerIcon} aria-hidden="true" alt="" />
-            <Link to="/" className={styles.headerTitleContainer}>
-              <h1 className={styles.headerTitle}>{ui?.title}</h1>
-            </Link>
+            {/* <img src={logo} className={styles.headerIcon} aria-hidden="true" alt="" /> */}
+            {/* <img src={logo} className={styles.headerIcon} aria-hidden="true" alt="" /> */}
+            {/* <Link to="/" className={styles.headerTitleContainer}> */}
+              {/* <h1 className={styles.headerTitle}>{ui?.title}</h1> */}
+              {/* <h1 className={styles.headerTitle}>سيف</h1> */}
+              <img src={headerLogo} className={styles.headerTextIcon} aria-hidden="true" alt="" />
+            {/* </Link> */}
           </Stack>
           <Stack horizontal tokens={{ childrenGap: 4 }} className={styles.shareButtonContainer}>
             {appStateContext?.state.isCosmosDBAvailable?.status !== CosmosDBStatus.NotConfigured && ui?.show_chat_history_button !== false && (
